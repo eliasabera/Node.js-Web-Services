@@ -1,0 +1,54 @@
+{
+  "students": [
+    {
+      "id": 101,
+      "name": "Elias Abera",
+      "age": 21,
+      "email": "elias.abera@university.edu",
+      "course": "Software Engineering",
+      "department": "Software Engineering",
+      "gpa": 3.3,
+      "enrollmentDate": "2022-09-01"
+    },
+    {
+      "id": 102,
+      "name": "Tsehaynesh Biruh",
+      "age": 22,
+      "email": "tsehaynesh.biruh@university.edu",
+      "course": "Software Engineering",
+      "department": "Software Engineering",
+      "gpa": 3.7,
+      "enrollmentDate": "2021-09-01"
+    },
+    {
+      "id": 103,
+      "name": "Eyob Birhanu",
+      "age": 20,
+      "email": "eyob.birhanu@university.edu",
+      "course": "Software Engineering",
+      "department": "Software Engineering",
+      "gpa": 3.9,
+      "enrollmentDate": "2023-01-15"
+    },
+    {
+      "id": 104,
+      "name": "Yeabsira Fekadu",
+      "age": 23,
+      "email": "yeabsira.fekadu@university.edu",
+      "course": "Software Engineering",
+      "department": "Software Engineering",
+      "gpa": 3.67,
+      "enrollmentDate": "2020-09-01"
+    },
+    {
+      "id": 105,
+      "name": "Natnael Zewdu",
+      "age": 24,
+      "email": "natnael.zewdu@university.edu",
+      "course": "Software Engineering",
+      "department": "Software Engineering",
+      "gpa": 3.78,
+      "enrollmentDate": "2019-09-01"
+    }
+  ]
+}

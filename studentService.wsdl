@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="StudentInfoService"
+             targetNamespace="http://example.com/student"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://example.com/student"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <types>
+    <xsd:schema targetNamespace="http://example.com/student">
+      
+      <!-- Get Student Request -->
+      <xsd:element name="GetStudentRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="studentId" type="xsd:integer"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <!-- Get Student Response -->
+      <xsd:element name="GetStudentResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="student" type="tns:Student"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <!-- Get All Students Response -->
+      <xsd:element name="GetAllStudentsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="students" type="tns:Student" minOccurs="0" maxOccurs="unbounded"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <!-- Student Type -->
+      <xsd:complexType name="Student">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:integer"/>
+          <xsd:element name="name" type="xsd:string"/>
+          <xsd:element name="age" type="xsd:integer"/>
+          <xsd:element name="email" type="xsd:string"/>
+          <xsd:element name="course" type="xsd:string"/>
+          <xsd:element name="department" type="xsd:string"/>
+          <xsd:element name="gpa" type="xsd:double"/>
+          <xsd:element name="enrollmentDate" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <!-- Error Response -->
+      <xsd:element name="StudentNotFoundError">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="errorCode" type="xsd:integer"/>
+            <xsd:element name="errorMessage" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+    </xsd:schema>
+  </types>
+
+  <!-- Messages -->
+  <message name="GetStudentInput">
+    <part name="parameters" element="tns:GetStudentRequest"/>
+  </message>
+  <message name="GetStudentOutput">
+    <part name="parameters" element="tns:GetStudentResponse"/>
+  </message>
+  <message name="GetAllStudentsOutput">
+    <part name="parameters" element="tns:GetAllStudentsResponse"/>
+  </message>
+  <message name="StudentNotFoundFault">
+    <part name="fault" element="tns:StudentNotFoundError"/>
+  </message>
+
+  <!-- Port Type -->
+  <portType name="StudentInfoPort">
+    <operation name="GetStudent">
+      <input message="tns:GetStudentInput"/>
+      <output message="tns:GetStudentOutput"/>
+      <fault name="StudentNotFound" message="tns:StudentNotFoundFault"/>
+    </operation>
+    <operation name="GetAllStudents">
+      <output message="tns:GetAllStudentsOutput"/>
+    </operation>
+  </portType>
+
+  <!-- Binding -->
+  <binding name="StudentInfoBinding" type="tns:StudentInfoPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetStudent">
+      <soap:operation soapAction="http://example.com/student/GetStudent"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="StudentNotFound">
+        <soap:fault name="StudentNotFound" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="GetAllStudents">
+      <soap:operation soapAction="http://example.com/student/GetAllStudents"/>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+
+  <!-- Service -->
+  <service name="StudentInfoService">
+    <port name="StudentInfoPort" binding="tns:StudentInfoBinding">
+      <soap:address location="http://localhost:8001/wsdl"/>
+    </port>
+  </service>
+</definitions>
